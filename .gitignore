@@ -60,3 +60,6 @@ src/wp-settings.php
 src/wp-signup.php
 src/wp-trackback.php
 src/xmlrpc.php
+
+# Ignore IDE
+.idea
