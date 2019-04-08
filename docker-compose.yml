@@ -2,7 +2,7 @@ version: '3.5'
 services:
   nginx:
     image: nginx:latest
-    container_name: myapp-nginx
+    container_name: tf-nginx
     ports:
       - '80:80'
       - '443:443'
@@ -16,7 +16,7 @@ services:
 
   mysql:
     image: mariadb
-    container_name: myapp-mysql
+    container_name: tf-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASAE=myapp
@@ -28,7 +28,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: myapp-wordpress
+    container_name: tf-wordpress
     volumes:
       - ./src:/var/www/html:rw,cached
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
@@ -43,7 +43,7 @@ services:
 
   composer:
     image: composer:latest
-    container_name: myapp-composer
+    container_name: tf-composer
     working_dir: /var/www/html
     restart: 'no'
     volumes:
