@@ -1,29 +1,14 @@
 version: '3.5'
 services:
-  nginx:
-    image: nginx:latest
-    container_name: tf-nginx
-    ports:
-      - '80:80'
-      - '443:443'
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./src:/var/www/html:rw,cached
-      - ./certs:/etc/certs
-    depends_on:
-      - wordpress
-    restart: always
-
   mysql:
     image: mariadb
     container_name: tf-mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASAE=myapp
+      - MYSQL_ROOT_PASSWORD=rojo1rojo2
+      - MYSQL_DATABASE=TheForgotten
     restart: always
     ports:
       - '3306:3306'
-
   wordpress:
     build:
       context: .
@@ -32,11 +17,13 @@ services:
     volumes:
       - ./src:/var/www/html:rw,cached
       - ./config/php.ini:/usr/local/etc/php/conf.d/php.ini
+    ports:
+      - '80:80'
     environment:
-      - WORDPRESS_DB_NAME=myapp
+      - WORDPRESS_DB_NAME=TheForgotten
       - WORDPRESS_TABLE_PREFIX=wp_
       - WORDPRESS_DB_HOST=mysql
-      - WORDPRESS_DB_PASSWORD=password
+      - WORDPRESS_DB_PASSWORD=rojo1rojo2
     depends_on:
       - mysql
     restart: always
